@@ -85,7 +85,7 @@ export const createMnTheme = (mode: 'light' | 'dark') => {
       text: config.text,
     },
     shape: {
-      borderRadius: 12, // Standardized modern corner radius
+      borderRadius: 4, // Less aggressive, subtle rounding
     },
     typography: {
       fontFamily: [

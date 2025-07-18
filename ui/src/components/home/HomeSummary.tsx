@@ -14,6 +14,22 @@ const HomeSummary: React.FC = () => {
       <Grid container spacing={4} alignItems="center" justifyContent="center">
         <Grid item xs={12} md={7}>
           <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+            <Typography
+              variant="h3"
+              component="h2"
+              sx={{
+                mb: 3,
+                fontWeight: 700,
+                color: 'primary.main',
+                letterSpacing: '-0.01em',
+                fontSize: { xs: '2rem', md: '2.5rem' },
+                textShadow: (theme) => theme.palette.mode === 'dark'
+                  ? '0 2px 8px rgba(124,77,255,0.10)'
+                  : '0 2px 8px rgba(65,42,145,0.08)',
+              }}
+            >
+              My journey
+            </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
               Growing up, technology was always part of my life. From playing Nintendo
               as a young child to taking apart and reassembling my family's Gateway

@@ -100,7 +100,7 @@ const BlogPostDetail = () => {
       </Button>
 
       {/* Article Header */}
-      <Paper elevation={0} sx={{ p: 0, mb: 4 }}>
+      <Paper elevation={0} sx={{ p: { xs: 2, md: 4 }, mb: 4 }}>
         {/* Featured Image */}
         {post.mainImage && (
           <Box
@@ -117,7 +117,7 @@ const BlogPostDetail = () => {
               width: '100%',
               height: { xs: '250px', md: '400px' },
               objectFit: 'cover',
-                borderRadius: theme.shape.borderRadius,
+              borderRadius: 4, // Match other cards/images for consistency
               mb: 3,
             }}
           />
@@ -177,35 +177,37 @@ const BlogPostDetail = () => {
         />
       </Paper>
 
-      {/* Article Content */}
-      <Box
-        sx={{
-          '& .blog-content': {
-            fontSize: '1.1rem',
-            lineHeight: 1.7,
-            color: theme.palette.text.primary,
-            '& p': {
-              marginBottom: 2,
+      {/* Article Content with Paper background */}
+      <Paper elevation={1} sx={{ p: { xs: 2, md: 4 }, mb: 4 }}>
+        <Box
+          sx={{
+            '& .blog-content': {
+              fontSize: '1.1rem',
+              lineHeight: 1.7,
               color: theme.palette.text.primary,
-              opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
+              '& p': {
+                marginBottom: 2,
+                color: theme.palette.text.primary,
+                opacity: theme.palette.mode === 'dark' ? 0.9 : 1,
+              },
+              '& h1, & h2, & h3, & h4, & h5, & h6': {
+                color: theme.palette.text.primary,
+                marginTop: 3,
+                marginBottom: 2,
+              },
+              '& blockquote': {
+                borderLeft: `4px solid ${theme.palette.primary.main}`,
+                paddingLeft: 2,
+                marginLeft: 0,
+                fontStyle: 'italic',
+                opacity: theme.palette.mode === 'dark' ? 0.9 : 0.8,
+              },
             },
-            '& h1, & h2, & h3, & h4, & h5, & h6': {
-              color: theme.palette.text.primary,
-              marginTop: 3,
-              marginBottom: 2,
-            },
-            '& blockquote': {
-              borderLeft: `4px solid ${theme.palette.primary.main}`,
-              paddingLeft: 2,
-              marginLeft: 0,
-              fontStyle: 'italic',
-              opacity: theme.palette.mode === 'dark' ? 0.9 : 0.8,
-            },
-          },
-        }}
-      >
-        {post.body && <BlogBody content={post.body} />}
-      </Box>
+          }}
+        >
+          {post.body && <BlogBody content={post.body} />}
+        </Box>
+      </Paper>
 
       {/* Footer */}
       <Box sx={{ mt: 6, pt: 4, borderTop: `1px solid ${theme.palette.divider}`, textAlign: 'center' }}>
