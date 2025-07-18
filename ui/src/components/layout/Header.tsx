@@ -88,12 +88,12 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
               variant="h3"
               component="span"
               sx={{
-                fontWeight: 800,
+                fontWeight: 500,
                 letterSpacing: '0.04em',
                 color: 'primary.dark',
                 fontFamily: 'Inter, Montserrat, Roboto, Arial, sans-serif',
                 lineHeight: 1.1,
-                fontSize: { xs: '2rem', md: '2.6rem' },
+                fontSize: { xs: '1.3rem', md: '2rem' },
                 textShadow: '0 2px 12px rgba(65,42,145,0.08)',
               }}
             >
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
                 fontFamily: 'Inter, Montserrat, Roboto, Arial, sans-serif',
                 letterSpacing: '0.08em',
                 mt: 0.2,
-                fontSize: { xs: '1rem', md: '1.2rem' },
+                fontSize: { xs: '0.85rem', md: '1rem' },
               }}
             >
               Software Development
