@@ -1,22 +1,21 @@
-import React from 'react';
-import ReCAPTCHA from 'react-google-recaptcha';
-import {
-  Box,
-  TextField,
-  Button,
-  Typography,
-  Alert,
-} from '@mui/material';
+import React from "react";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Box, TextField, Button, Typography, Alert } from "@mui/material";
 
 interface ContactFormProps {
-  onSubmit?: (data: { name: string; email: string; message: string; captchaToken: string | null }) => void;
+  onSubmit?: (data: {
+    name: string;
+    email: string;
+    message: string;
+    captchaToken: string | null;
+  }) => void;
 }
 
 const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
   const [formData, setFormData] = React.useState({
-    name: '',
-    email: '',
-    message: ''
+    name: "",
+    email: "",
+    message: "",
   });
   const [captchaToken, setCaptchaToken] = React.useState<string | null>(null);
   const [showCaptchaError, setShowCaptchaError] = React.useState(false);
@@ -24,7 +23,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!captchaToken) {
       setShowCaptchaError(true);
       return;
@@ -33,9 +32,9 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     if (onSubmit) {
       onSubmit({ ...formData, captchaToken });
     }
-    
+
     // Reset form
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: "", email: "", message: "" });
     setCaptchaToken(null);
     setShowCaptchaError(false);
     if (recaptchaRef.current) {
@@ -50,12 +49,13 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
     }
   };
 
-  const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: e.target.value
-    }));
-  };
+  const handleChange =
+    (field: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: e.target.value,
+      }));
+    };
 
   return (
     <Box sx={{ mt: 4, mb: 8 }}>
@@ -67,7 +67,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           fullWidth
           label="Name"
           value={formData.name}
-          onChange={handleChange('name')}
+          onChange={handleChange("name")}
           margin="normal"
           required
         />
@@ -76,7 +76,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           label="Email"
           type="email"
           value={formData.email}
-          onChange={handleChange('email')}
+          onChange={handleChange("email")}
           margin="normal"
           required
         />
@@ -86,16 +86,19 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           multiline
           rows={4}
           value={formData.message}
-          onChange={handleChange('message')}
+          onChange={handleChange("message")}
           margin="normal"
           required
         />
-        
+
         {/* reCAPTCHA */}
         <Box sx={{ mt: 3, mb: 2 }}>
           <ReCAPTCHA
             ref={recaptchaRef}
-            sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY || "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"} // Test key
+            sitekey={
+              import.meta.env.VITE_RECAPTCHA_SITE_KEY ||
+              "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+            } // Test key
             onChange={handleCaptchaChange}
             theme="light"
           />
@@ -106,12 +109,7 @@ const ContactForm: React.FC<ContactFormProps> = ({ onSubmit }) => {
           )}
         </Box>
 
-        <Button
-          type="submit"
-          variant="contained"
-          sx={{ mt: 2 }}
-          fullWidth
-        >
+        <Button type="submit" variant="contained" sx={{ mt: 2 }} fullWidth>
           Send Message
         </Button>
       </Box>

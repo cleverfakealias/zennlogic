@@ -16,7 +16,9 @@ import Home from "./components/pages/Home";
 import { createMnTheme } from "./theme";
 function App() {
   const getSystemTheme = () =>
-    window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   const [themeMode, setThemeMode] = useState(getSystemTheme());
 
   useEffect(() => {
@@ -38,26 +40,30 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Header themeMode={themeMode} setThemeMode={setThemeMode} />
-      <main style={{ 
-        flex: 1, 
-        display: 'flex', 
-        flexDirection: 'column',
-        marginTop: '4.5rem', // Space for fixed header
-        marginBottom: '4rem', // Space for fixed footer
-        minHeight: 'calc(100vh - 8.5rem)' // Full height minus header and footer
-      }}>
-        <Container sx={{ 
-          width: "90%", 
-          flex: 1, 
-          display: 'flex', 
-          flexDirection: 'column', 
-          justifyContent: 'flex-start', 
-          alignItems: 'flex-start',
-          paddingTop: { xs: 2, md: 3 }, // Small responsive top padding
-          paddingBottom: { xs: 2, md: 3 }, // Small responsive bottom padding
-          marginBottom: 0,
-          gap: { xs: 2, md: 3 }, // Consistent spacing between child components
-        }}>
+      <main
+        style={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          marginTop: "4.5rem", // Space for fixed header
+          marginBottom: "4rem", // Space for fixed footer
+          minHeight: "calc(100vh - 8.5rem)", // Full height minus header and footer
+        }}
+      >
+        <Container
+          sx={{
+            width: "90%",
+            flex: 1,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-start",
+            alignItems: "flex-start",
+            paddingTop: { xs: 2, md: 3 }, // Small responsive top padding
+            paddingBottom: { xs: 2, md: 3 }, // Small responsive bottom padding
+            marginBottom: 0,
+            gap: { xs: 2, md: 3 }, // Consistent spacing between child components
+          }}
+        >
           <Router>
             <Routes>
               <Route path="/" element={<Home />} />

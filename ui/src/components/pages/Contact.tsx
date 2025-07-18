@@ -1,48 +1,57 @@
-import React from 'react';
-import FormspreeContactForm from '../ui/FormspreeContactForm';
-import ContactInformation from '../ui/ContactInformation';
-import { Card, CardContent, useTheme, Container, Box, Typography } from '@mui/material';
+import React from "react";
+import FormspreeContactForm from "../ui/FormspreeContactForm";
+import ContactInformation from "../ui/ContactInformation";
+import {
+  Card,
+  CardContent,
+  useTheme,
+  Container,
+  Box,
+  Typography,
+} from "@mui/material";
 
 const Contact: React.FC = () => {
   const theme = useTheme();
   return (
     <Container maxWidth="md" sx={{ py: 8 }}>
       {/* Header Section */}
-      <Box sx={{ textAlign: 'center', mb: 6 }}>
-        <Typography 
-          variant="h2" 
-          component="h1" 
+      <Box sx={{ textAlign: "center", mb: 6 }}>
+        <Typography
+          variant="h2"
+          component="h1"
           gutterBottom
-          sx={{ 
-            fontWeight: 'bold',
+          sx={{
+            fontWeight: "bold",
             color: theme.palette.primary.main,
-            mb: 2
+            mb: 2,
           }}
         >
           Contact
         </Typography>
-        <Typography 
-          variant="h5" 
-          sx={{ 
-            maxWidth: '600px', 
-            mx: 'auto',
+        <Typography
+          variant="h5"
+          sx={{
+            maxWidth: "600px",
+            mx: "auto",
             color: theme.palette.text.secondary,
-            opacity: theme.palette.mode === 'dark' ? 0.9 : 0.7
+            opacity: theme.palette.mode === "dark" ? 0.9 : 0.7,
           }}
         >
-          Get in touch for project inquiries, collaboration, or just to say hello!
+          Get in touch for project inquiries, collaboration, or just to say
+          hello!
         </Typography>
         {/* Decorative line */}
         <Box
           sx={{
             mt: 3,
-            width: { xs: '100px', md: '150px' },
-            height: '4px',
-            background: theme.palette.mode === 'dark' 
-              ? 'linear-gradient(90deg, #7C4DFF, #448AFF)'
-              : 'linear-gradient(90deg, #412A91, #002B5C)',
+            width: { xs: "100px", md: "150px" },
+            height: "4px",
+            background:
+              theme.palette.mode === "dark"
+                ? "linear-gradient(90deg, #7C4DFF, #448AFF)"
+                : "linear-gradient(90deg, #412A91, #002B5C)",
             borderRadius: theme.shape.borderRadius,
-            mx: 'auto',
+            mx: "auto",
           }}
         />
       </Box>
@@ -50,29 +59,31 @@ const Contact: React.FC = () => {
       <Box>
         <Card
           sx={{
-            borderRadius: '16px',
-            background: theme.palette.mode === 'dark'
-              ? 'linear-gradient(145deg, rgba(30,30,30,0.95) 0%, rgba(40,40,40,0.95) 100%)'
-              : 'linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.96) 100%)',
-            boxShadow: '0 8px 24px rgba(65, 42, 145, 0.10)',
+            borderRadius: "16px",
+            background:
+              theme.palette.mode === "dark"
+                ? "linear-gradient(145deg, rgba(30,30,30,0.95) 0%, rgba(40,40,40,0.95) 100%)"
+                : "linear-gradient(145deg, rgba(255,255,255,0.96) 0%, rgba(248,250,252,0.96) 100%)",
+            boxShadow: "0 8px 24px rgba(65, 42, 145, 0.10)",
             border: `1px solid ${theme.palette.divider}`,
-            overflow: 'visible',
-            position: 'relative',
+            overflow: "visible",
+            position: "relative",
             mb: 4,
-            width: '100%',
-            '&:hover': {
-              boxShadow: '0 20px 40px rgba(65, 42, 145, 0.15)',
-              ...(theme.palette.mode === 'dark' && {
-                background: 'linear-gradient(145deg, rgba(50,50,50,0.95) 0%, rgba(60,60,60,0.95) 100%)',
-              })
+            width: "100%",
+            "&:hover": {
+              boxShadow: "0 20px 40px rgba(65, 42, 145, 0.15)",
+              ...(theme.palette.mode === "dark" && {
+                background:
+                  "linear-gradient(145deg, rgba(50,50,50,0.95) 0%, rgba(60,60,60,0.95) 100%)",
+              }),
             },
-            '&::before': {
+            "&::before": {
               content: '""',
-              position: 'absolute',
+              position: "absolute",
               top: 0,
               left: 0,
               right: 0,
-              height: '4px',
+              height: "4px",
               background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
             },
           }}

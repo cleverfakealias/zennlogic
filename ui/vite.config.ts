@@ -6,10 +6,10 @@ export default defineConfig({
   plugins: [react()],
   define: {
     // Fix for libraries that expect process.env to be available
-    'process.env': {},
-    global: 'globalThis',
+    "process.env": {},
+    global: "globalThis",
   },
   optimizeDeps: {
-    include: ['@sanity/client']
-  }
+    include: ["@sanity/client"],
+  },
 });

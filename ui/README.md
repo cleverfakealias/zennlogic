@@ -1,9 +1,9 @@
-
 # Zennlogic UI
 
 This is the UI for the Zennlogic project, built with React, TypeScript, Vite, and Material-UI.
 
 ## Features
+
 - Modern responsive design
 - Light and dark mode support
 - Contact form with Formspree and reCAPTCHA
@@ -34,6 +34,7 @@ This is the UI for the Zennlogic project, built with React, TypeScript, Vite, an
 ## Environment Variables
 
 Create a `.env` file in the root with:
+
 ```
 VITE_FORMSPREE_URL=your-formspree-endpoint
 VITE_RECAPTCHA_SITE_KEY=your-recaptcha-site-key
