@@ -9,18 +9,21 @@ const clientConfig = {
 };
 
 // Only create client if we have a valid project ID
-const hasValidConfig = clientConfig.projectId && 
-  clientConfig.projectId !== "your-project-id" && 
+const hasValidConfig =
+  clientConfig.projectId &&
+  clientConfig.projectId !== "your-project-id" &&
   /^[a-z0-9-]+$/.test(clientConfig.projectId);
 
 export const sanityClient = hasValidConfig ? createClient(clientConfig) : null;
 
 export async function fetchPosts() {
   if (!sanityClient) {
-    console.warn("Sanity client not configured. Please set VITE_SANITY_PROJECT_ID and VITE_SANITY_DATASET environment variables.");
+    console.warn(
+      "Sanity client not configured. Please set VITE_SANITY_PROJECT_ID and VITE_SANITY_DATASET environment variables.",
+    );
     return [];
   }
-  
+
   const query = `*[_type == "post"] | order(publishedAt desc, _createdAt desc) {
     title,
     slug,
@@ -39,7 +42,7 @@ export async function getAllPostSlugs() {
     console.warn("Sanity client not configured.");
     return [];
   }
-  
+
   const query = `*[_type == "post"]{ "slug": slug.current }`;
   return await sanityClient.fetch(query);
 }
@@ -49,7 +52,7 @@ export async function getPostBySlug(slug: string) {
     console.warn("Sanity client not configured.");
     return null;
   }
-  
+
   const query = `*[_type == "post" && slug.current == $slug][0]{
     title,
     body,

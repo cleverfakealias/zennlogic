@@ -1,23 +1,18 @@
-
-import '@testing-library/jest-dom';
+import "@testing-library/jest-dom";
 // Mock fetchPosts from the correct path used in Blog.tsx
-jest.mock('../blog/sanity/sanityClient', () => ({
+jest.mock("../blog/sanity/sanityClient", () => ({
   fetchPosts: jest.fn(() => Promise.resolve([])),
 }));
-import { render, waitFor } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
-import Blog from '../blog/Blog';
+import { render, waitFor } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
+import Blog from "../blog/Blog";
 
 const renderWithRouter = (component: React.ReactElement) => {
-  return render(
-    <BrowserRouter>
-      {component}
-    </BrowserRouter>
-  );
+  return render(<BrowserRouter>{component}</BrowserRouter>);
 };
 
-describe('Blog', () => {
-  test('renders without crashing', async () => {
+describe("Blog", () => {
+  test("renders without crashing", async () => {
     await waitFor(() => {
       renderWithRouter(<Blog />);
     });
@@ -25,14 +20,14 @@ describe('Blog', () => {
     expect(document.body).toBeInTheDocument();
   });
 
-  test('renders blog heading or loading state', async () => {
+  test("renders blog heading or loading state", async () => {
     renderWithRouter(<Blog />);
     // Wait for any async state updates to flush
     await waitFor(() => {
       expect(document.body).toBeInTheDocument();
     });
     // Should either show blog content or loading state
-    // Since we're mocking Sanity to return empty array, 
+    // Since we're mocking Sanity to return empty array,
     // the component should handle this gracefully
   });
 });
