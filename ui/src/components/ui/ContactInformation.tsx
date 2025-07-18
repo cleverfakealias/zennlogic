@@ -4,16 +4,13 @@ import {
   Grid,
   Box,
   Link,
-  Avatar,
   useTheme,
 } from '@mui/material';
 import {
   Email,
   Phone,
-  LocationOn,
   LinkedIn,
   GitHub,
-  Web,
 } from '@mui/icons-material';
 
 const ContactInformation: React.FC = () => {
