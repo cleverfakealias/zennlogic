@@ -1,3 +1,23 @@
+export interface BlogPost {
+  title: string;
+  slug: {
+    current: string;
+  };
+  excerpt?: string;
+  publishedAt?: string;
+  _createdAt?: string;
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: string;
+    };
+    alt?: string;
+  };
+  estimatedReadingTime?: number;
+  author?: string;
+  body?: Block[];
+}
+
 export interface Span {
   marks: string[];
   text: string;

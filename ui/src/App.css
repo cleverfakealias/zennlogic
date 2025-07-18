@@ -1,3 +1,17 @@
+/* App-level styles for fixed header/footer layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 /* #root {
   max-width: ;
   margin: 0 auto;

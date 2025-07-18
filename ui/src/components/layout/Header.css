@@ -1,0 +1,210 @@
+
+.header {
+  width: 100vw;
+  background: var(--header-bg, #4F2683);
+  color: var(--header-text, #FFFFFF);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+/* Theme-specific header styling */
+body[data-theme="dark"] .header {
+  background: #412A91; /* Updated ABE Purple */
+  color: #FFFFFF;
+}
+
+body[data-theme="light"] .header {
+  background: #412A91; /* Updated ABE Purple */
+  color: #FFFFFF;
+}
+
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 1rem;
+}
+
+
+.header-logo .site-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+
+
+.header-links {
+  display: flex;
+  gap: 1.2rem;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.header-links a {
+  color: var(--header-text, #FFFFFF);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+}
+
+.header-links a:hover,
+.header-links a:focus {
+  color: var(--header-link-hover, #8CD2EF);
+  text-shadow: 0 0 8px var(--header-link-glow, #4F2683);
+  outline: none;
+}
+
+.header-links a.active {
+  color: #FFFFFF;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(140, 210, 239, 0.8);
+}
+
+/* Glow animation for active link underline */
+@keyframes glow {
+  0% {
+    box-shadow: 0 2px 8px rgba(140, 210, 239, 0.6);
+  }
+  100% {
+    box-shadow: 0 2px 12px rgba(140, 210, 239, 0.9), 0 0 20px rgba(140, 210, 239, 0.4);
+  }
+}
+
+/* Dark mode adjustments for active links */
+body[data-theme="dark"] .header-links a.active {
+  color: #8CD2EF;
+  text-shadow: 0 0 8px rgba(140, 210, 239, 0.9);
+}
+
+body[data-theme="light"] .header-links a.active {
+  color: #FFFFFF;
+  text-shadow: 0 0 8px rgba(140, 210, 239, 0.8);
+}
+
+/* Theme-specific link colors */
+body[data-theme="dark"] .header-links a:hover {
+  color: #8CD2EF; /* Loon Gray */
+  text-shadow: 0 0 8px #FFC62F; /* Vikings Gold */
+}
+
+body[data-theme="light"] .header-links a:hover {
+  color: #FFC62F; /* Vikings Gold */
+  text-shadow: 0 0 8px #8CD2EF; /* Loon Gray */
+}
+
+.site-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--header-text, #FFFFFF);
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--header-text, #FFFFFF);
+  font-size: 2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.menu-btn:hover {
+  color: var(--header-link-hover, #8CD2EF);
+}
+
+/* Mobile Styles */
+
+@media (max-width: 768px) {
+  .header-nav {
+    padding: 0.75rem 1rem;
+  }
+  .header-links {
+    display: none !important;
+  }
+  .menu-btn {
+    display: block;
+  }
+  .mobile-drawer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 70vw;
+    max-width: 320px;
+    height: 100vh;
+    background: var(--header-bg, #4F2683);
+    color: var(--header-text, #FFFFFF);
+    box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+    z-index: 200;
+    padding: 2rem 1.5rem;
+    transition: transform 0.3s ease;
+    transform: translateX(100%);
+  }
+  
+  /* Theme-specific mobile drawer */
+  body[data-theme="dark"] .mobile-drawer {
+    background: #412A91; /* Updated ABE Purple */
+  }
+  
+  body[data-theme="light"] .mobile-drawer {
+    background: #412A91; /* Updated ABE Purple */
+  }
+  .mobile-drawer.open {
+    display: block;
+    transform: translateX(0);
+  }
+  .mobile-drawer ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .mobile-drawer a {
+    color: var(--header-text, #FFFFFF);
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    margin: 0 -16px;
+  }
+  
+  .mobile-drawer a:hover,
+  .mobile-drawer a:focus {
+    color: var(--header-link-hover, #8CD2EF);
+    text-shadow: 0 0 8px var(--header-link-glow, #4F2683);
+    outline: none;
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  .mobile-drawer a.active {
+    color: #8CD2EF;
+    text-shadow: 0 0 8px rgba(140, 210, 239, 0.9);
+    font-weight: 600;
+  }
+  
+  /* Theme-specific mobile drawer links */
+  body[data-theme="dark"] .mobile-drawer a:hover {
+    color: #8CD2EF; /* Loon Gray */
+    text-shadow: 0 0 8px #FFC62F; /* Vikings Gold */
+  }
+  
+  body[data-theme="light"] .mobile-drawer a:hover {
+    color: #FFC62F; /* Vikings Gold */
+    text-shadow: 0 0 8px #8CD2EF; /* Loon Gray */
+  }
+}

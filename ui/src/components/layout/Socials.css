@@ -1,0 +1,29 @@
+
+.socials a svg {
+  color: var(--social-icon-color);
+  transition: color 0.3s ease, filter 0.3s ease;
+}
+
+.socials a:hover svg {
+  color: var(--social-icon-hover);
+  filter: drop-shadow(0 0 4px var(--social-icon-shadow));
+}
+
+/* Fallback for browsers that don't support CSS custom properties */
+body[data-theme="dark"] .socials a svg {
+  color: #EEEEEE; /* United Light Grey */
+}
+
+body[data-theme="dark"] .socials a:hover svg {
+  color: #8CD2EF; /* Loon Gray */
+  filter: drop-shadow(0 0 4px #412A91); /* Updated ABE Purple */
+}
+
+body[data-theme="light"] .socials a svg {
+  color: #EEEEEE; /* United Light Grey */
+}
+
+body[data-theme="light"] .socials a:hover svg {
+  color: #412A91; /* Updated ABE Purple */
+  filter: drop-shadow(0 0 4px #8CD2EF); /* Loon Gray */
+}
