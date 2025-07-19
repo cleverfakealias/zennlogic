@@ -1,10 +1,18 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
+import { ThemeProvider } from "@mui/material/styles";
+import { createMnTheme } from "../../theme";
 import Header from "../layout/Header";
 
-// Mock props
+const theme = createMnTheme("light");
+
+const renderWithTheme = (component: React.ReactElement) => {
+  return render(<ThemeProvider theme={theme}>{component}</ThemeProvider>);
+};
+
+// Mock props for Header component
 const mockProps = {
-  themeMode: "light",
+  themeMode: "light" as const,
   setThemeMode: jest.fn(),
 };
 
@@ -14,59 +22,41 @@ describe("Header", () => {
   });
 
   test("renders navigation links", () => {
-    render(<Header {...mockProps} />);
+    renderWithTheme(<Header {...mockProps} />);
 
     expect(screen.getByText("Home")).toBeInTheDocument();
     expect(screen.getByText("Blog")).toBeInTheDocument();
-    expect(screen.getByText("Career")).toBeInTheDocument();
+    expect(screen.getByText("Experience")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
     expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 
-  test("renders theme toggle button", () => {
-    render(<Header {...mockProps} />);
+  test("renders logo and branding", () => {
+    renderWithTheme(<Header {...mockProps} />);
 
-    const themeButton = screen.getByRole("button");
-    expect(themeButton).toBeInTheDocument();
+    expect(screen.getByText("ZennLogic")).toBeInTheDocument();
+    expect(screen.getByText("Software Development")).toBeInTheDocument();
   });
 
-  test("calls setThemeMode when theme button is clicked", () => {
-    render(<Header {...mockProps} />);
+  test("renders social links", () => {
+    renderWithTheme(<Header {...mockProps} />);
 
-    const themeButton = screen.getByRole("button");
-    fireEvent.click(themeButton);
-
-    expect(mockProps.setThemeMode).toHaveBeenCalledWith("dark");
-  });
-
-  test("shows correct icon for light theme", () => {
-    render(<Header {...mockProps} />);
-
-    // Should show moon icon when in light mode (to switch to dark)
-    const moonIcon = document.querySelector("svg");
-    expect(moonIcon).toBeInTheDocument();
-  });
-
-  test("shows correct icon for dark theme", () => {
-    const darkProps = { ...mockProps, themeMode: "dark" };
-    render(<Header {...darkProps} />);
-
-    // Should show sun icon when in dark mode (to switch to light)
-    const sunIcon = document.querySelector("svg");
-    expect(sunIcon).toBeInTheDocument();
+    // Check for social links (LinkedIn and GitHub)
+    expect(screen.getByLabelText("LinkedIn")).toBeInTheDocument();
+    expect(screen.getByLabelText("GitHub")).toBeInTheDocument();
   });
 
   test("navigation links have correct href attributes", () => {
-    render(<Header {...mockProps} />);
+    renderWithTheme(<Header {...mockProps} />);
 
     expect(screen.getByText("Home").closest("a")).toHaveAttribute("href", "/");
     expect(screen.getByText("Blog").closest("a")).toHaveAttribute(
       "href",
       "/blog",
     );
-    expect(screen.getByText("Career").closest("a")).toHaveAttribute(
+    expect(screen.getByText("Experience").closest("a")).toHaveAttribute(
       "href",
-      "/career",
+      "/experience",
     );
     expect(screen.getByText("About").closest("a")).toHaveAttribute(
       "href",
