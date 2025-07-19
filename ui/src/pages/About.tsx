@@ -11,9 +11,11 @@ import {
   useTheme,
 } from "@mui/material";
 import { Code, Cloud, Architecture, Work } from "@mui/icons-material";
+import GradientDivider from "../components/common/GradientDivider";
 
 const About: React.FC = () => {
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const skills = [
     "React",
@@ -86,28 +88,13 @@ const About: React.FC = () => {
         >
           Passionate software engineer dedicated to building impactful solutions
         </Typography>
-        <Box
-          sx={{
-            width: { xs: "80%", md: "400px" },
-            height: "5px",
-            borderRadius: "2px",
-            mx: "auto",
-          }}
-        />
       </Box>
 
       {/* Technical Skills Section */}
       <Box sx={{ textAlign: "center", mb: 6 }}>
-        <Box
-          sx={{
-            mb: 4,
-            width: { xs: "80%", md: "400px" },
-            height: "5px",
-            background: "linear-gradient(90deg, #412A91, #002B5C)",
-            borderRadius: "2px",
-            mx: "auto",
-          }}
-        />
+        <Box sx={{ mb: 4 }}>
+          <GradientDivider />
+        </Box>
         <Typography
           variant="h4"
           component="h2"
@@ -135,24 +122,13 @@ const About: React.FC = () => {
               variant="outlined"
               sx={{
                 fontSize: "0.9rem",
-                "&:hover": {
-                  bgcolor: theme.palette.primary.main,
-                  color: theme.palette.primary.contrastText,
-                },
               }}
             />
           ))}
         </Box>
-        <Box
-          sx={{
-            mt: 4,
-            width: { xs: "80%", md: "400px" },
-            height: "5px",
-            background: "linear-gradient(90deg, #412A91, #002B5C)",
-            borderRadius: "2px",
-            mx: "auto",
-          }}
-        />
+        <Box sx={{ mt: 4 }}>
+          <GradientDivider />
+        </Box>
       </Box>
       {/* Introduction Section */}
       <Grid container spacing={4} sx={{ mb: 6 }} alignItems="center">
@@ -249,7 +225,9 @@ const About: React.FC = () => {
                 width: 240,
                 height: 240,
                 border: `4px solid ${theme.palette.primary.main}`,
-                boxShadow: theme.shadows[6],
+                boxShadow: isDark
+                  ? theme.custom.shadows.card.dark
+                  : theme.custom.shadows.card.light,
               }}
               src="/images/ABE.png"
               alt="Ben Hickman"
@@ -260,16 +238,9 @@ const About: React.FC = () => {
         </Grid>
       </Grid>
       <Box sx={{ textAlign: "center", mb: 6 }}>
-        <Box
-          sx={{
-            mb: 4,
-            width: { xs: "80%", md: "400px" },
-            height: "5px",
-            background: "linear-gradient(90deg, #412A91, #002B5C)",
-            borderRadius: "2px",
-            mx: "auto",
-          }}
-        />
+        <Box sx={{ mb: 4 }}>
+          <GradientDivider />
+        </Box>
         <Typography
           variant="h4"
           component="h2"
@@ -289,13 +260,6 @@ const About: React.FC = () => {
                 sx={{
                   height: "100%",
                   textAlign: "center",
-                  transition:
-                    "transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out",
-                  "&:hover": {
-                    transform: "translateY(-4px)",
-                    boxShadow: theme.shadows[8],
-                  },
-                  border: `1px solid ${theme.palette.divider}`,
                 }}
               >
                 <CardContent sx={{ p: 3 }}>

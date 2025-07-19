@@ -1,19 +1,18 @@
-import "./App.css";
+import "./styles/App.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect, useState } from "react";
-import Blog from "./components/blog/Blog";
-import BlogPostDetail from "./components/blog/BlogPostDetail";
-import CareerTimeline from "./components/pages/CareerTimeline";
-import Contact from "./components/pages/Contact";
-import About from "./components/pages/About";
-import DevelopmentExperience from "./components/pages/DevelopmentExperience";
+import Blog from "./components/features/Blog";
+import BlogPostDetail from "./components/features/BlogPostDetail";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import DevelopmentExperience from "./pages/DevelopmentExperience";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/pages/Home";
-import { createMnTheme } from "./theme";
+import Home from "./pages/Home";
+import { createMnTheme } from "./styles/theme";
 function App() {
   const getSystemTheme = () =>
     window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -51,15 +50,15 @@ function App() {
         }}
       >
         <Container
+          maxWidth="lg"
           sx={{
-            width: "90%",
             flex: 1,
             display: "flex",
             flexDirection: "column",
             justifyContent: "flex-start",
             alignItems: "flex-start",
             paddingTop: { xs: 2, md: 3 }, // Small responsive top padding
-            paddingBottom: { xs: 2, md: 3 }, // Small responsive bottom padding
+            paddingBottom: { xs: 6, md: 8 }, // More bottom padding for footer space
             marginBottom: 0,
             gap: { xs: 2, md: 3 }, // Consistent spacing between child components
           }}
@@ -69,7 +68,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="blog" element={<Blog />} />
               <Route path="blog/post/:slug" element={<BlogPostDetail />} />
-              <Route path="career" element={<CareerTimeline />} />
               <Route path="experience" element={<DevelopmentExperience />} />
               <Route path="about" element={<About />} />
               <Route path="contact" element={<Contact />} />
@@ -77,7 +75,7 @@ function App() {
           </Router>
         </Container>
       </main>
-      <Footer />
+      <Footer themeMode={themeMode} setThemeMode={setThemeMode} />
     </ThemeProvider>
   );
 }

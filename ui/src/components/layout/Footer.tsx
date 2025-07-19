@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {
   Avatar,
-  useTheme,
+  Box,
+  Typography,
   Menu,
   MenuItem,
   IconButton,
@@ -70,82 +71,129 @@ const FooterQuickLinks: React.FC = () => {
   );
 };
 
-const Footer: React.FC = () => {
-  const theme = useTheme();
+import { FaSun, FaMoon } from "react-icons/fa";
+
+interface FooterProps {
+  themeMode: string;
+  setThemeMode: (mode: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ themeMode, setThemeMode }) => {
+  const isDark = themeMode === "dark";
   return (
     <footer
       className="footer"
       role="contentinfo"
       aria-label="Site footer"
-      style={{ padding: "0 24px" }}
+      style={{ padding: "0 16px" }}
     >
-      <div
+      <Box
         className="footer-content"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "1fr 1fr 1fr",
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
           alignItems: "center",
+          justifyContent: "space-between",
           width: "100%",
           maxWidth: 1200,
           margin: "0 auto",
           boxSizing: "border-box",
-          padding: "0",
+          padding: { xs: "8px 0", md: "8px 0" },
+          gap: { xs: 0.5, md: 0 },
         }}
       >
-        {/* Left cell: Mission statement */}
-        <div
-          className="footer-cell-left"
-          style={{
-            textAlign: "left",
+        {/* Left side - Logo and mission */}
+        <Box
+          sx={{
             display: "flex",
             alignItems: "center",
-            gap: "0.75rem",
-            height: "100%",
+            gap: "0.5rem",
+            order: { xs: 1, md: 1 },
           }}
         >
           <Avatar
             src="/images/ZL monogram.png"
             alt="ZennLogic monogram logo"
             sx={{
-              width: 32,
-              height: 32,
-              border: "2px solid",
-              borderColor: theme.palette.primary.main,
-              boxShadow: theme.shadows[4],
-              bgcolor: "background.paper",
+              width: { xs: 20, md: 20 },
+              height: { xs: 20, md: 20 },
+              border: "1.5px solid #8CD2EF",
+              boxShadow: "0 2px 8px 0 rgba(140,210,239,0.10)",
+              bgcolor: "#fff",
             }}
           />
-          <span aria-label="Mission statement">Architect. Build. Elevate.</span>
-        </div>
-        {/* Center cell: Copyright and tech stack */}
-        <div className="footer-cell-center" style={{ textAlign: "center" }}>
-          <p style={{ margin: 0 }}>
-            &copy; {new Date().getFullYear()} Ben Hickman. All rights reserved.
-          </p>
-          <p style={{ margin: 0 }}>
-            Built with love{" "}
-            <span role="img" aria-label="love">
-              ❤️
-            </span>{" "}
-            by Ben Hickman using React, Vite, and Sanity.
-          </p>
-        </div>
-        {/* Right cell: Quick links dropdown and social links */}
-        <div
-          className="footer-cell-right"
-          style={{
-            textAlign: "right",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "flex-end",
-            gap: "0.5rem",
+          <Typography
+            sx={{
+              fontWeight: 600,
+              fontSize: { xs: "0.8rem", md: "0.85rem" },
+              color: "#8CD2EF",
+              letterSpacing: "0.04em",
+            }}
+            aria-label="Mission statement"
+          >
+            Architect. Build. Elevate.
+          </Typography>
+        </Box>
+
+        {/* Center - Copyright (desktop only) */}
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "0.85rem",
+            color: "#fff",
+            opacity: 0.85,
+            display: { xs: "none", md: "block" },
+            order: { xs: 3, md: 2 },
           }}
         >
-          {/* Quick Links Dropdown */}
+          &copy; {new Date().getFullYear()} Ben Hickman. All rights reserved.
+        </Typography>
+
+        {/* Right side - Actions */}
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: { xs: "0.25rem", md: "0.5rem" },
+            order: { xs: 2, md: 3 },
+          }}
+        >
           <FooterQuickLinks />
           <Socials />
-        </div>
-      </div>
+          <IconButton
+            aria-label={isDark ? "Switch to light mode" : "Switch to dark mode"}
+            onClick={() => setThemeMode(isDark ? "light" : "dark")}
+            sx={{
+              color: isDark ? "#FFD600" : "#1976d2",
+              background: isDark
+                ? "rgba(255,255,255,0.08)"
+                : "rgba(140,210,239,0.10)",
+              border: "1.5px solid #8CD2EF",
+              width: { xs: 28, md: 28 },
+              height: { xs: 28, md: 28 },
+              transition: "background 0.3s, color 0.3s",
+            }}
+            size="small"
+          >
+            {isDark ? <FaSun size={16} /> : <FaMoon size={14} />}
+          </IconButton>
+        </Box>
+
+        {/* Mobile copyright (bottom) */}
+        <Typography
+          sx={{
+            textAlign: "center",
+            fontSize: "0.75rem",
+            color: "#fff",
+            opacity: 0.75,
+            display: { xs: "block", md: "none" },
+            order: { xs: 3, md: 4 },
+            marginTop: "2px",
+          }}
+        >
+          &copy; {new Date().getFullYear()} Ben Hickman
+        </Typography>
+      </Box>
     </footer>
   );
 };

@@ -389,7 +389,7 @@ const FormspreeContactForm: React.FC<FormspreeContactFormProps> = ({
                   ),
                   boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.18)",
                   "&:hover": {
-                    background: `linear-gradient(90deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark || theme.palette.secondary.main} 100%)`,
+                    background: `linear-gradient(90deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark} 100%)`,
                   },
                   "&:disabled": {
                     background: theme.palette.grey[400],

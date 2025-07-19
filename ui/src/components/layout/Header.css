@@ -138,17 +138,22 @@ body[data-theme="light"] .header-links a:hover {
     display: none;
     position: fixed;
     top: 0;
+    left: 0;
     right: 0;
-    width: 70vw;
-    max-width: 320px;
-    height: 100vh;
+    width: 100vw;
+    height: auto;
+    max-height: 80vh;
     background: var(--header-bg, #4f2683);
     color: var(--header-text, #ffffff);
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
     z-index: 200;
     padding: 2rem 1.5rem;
-    transition: transform 0.3s ease;
-    transform: translateX(100%);
+    transition:
+      transform 0.3s ease,
+      opacity 0.3s ease;
+    transform: translateY(-100%);
+    opacity: 0;
+    border-radius: 0 0 16px 16px;
   }
 
   /* Theme-specific mobile drawer */
@@ -161,7 +166,8 @@ body[data-theme="light"] .header-links a:hover {
   }
   .mobile-drawer.open {
     display: block;
-    transform: translateX(0);
+    transform: translateY(0);
+    opacity: 1;
   }
   .mobile-drawer ul {
     list-style: none;

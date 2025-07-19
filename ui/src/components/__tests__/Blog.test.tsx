@@ -1,11 +1,11 @@
 import "@testing-library/jest-dom";
 // Mock fetchPosts from the correct path used in Blog.tsx
-jest.mock("../blog/sanity/sanityClient", () => ({
+jest.mock("../features/sanity/sanityClient", () => ({
   fetchPosts: jest.fn(() => Promise.resolve([])),
 }));
 import { render, waitFor } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import Blog from "../blog/Blog";
+import Blog from "../features/Blog";
 
 const renderWithRouter = (component: React.ReactElement) => {
   return render(<BrowserRouter>{component}</BrowserRouter>);

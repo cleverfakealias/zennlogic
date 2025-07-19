@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material/styles";
-import { createMnTheme } from "../../theme";
-import DevelopmentExperience from "../pages/DevelopmentExperience";
+import { createMnTheme } from "../../styles/theme";
+import DevelopmentExperience from "../../pages/DevelopmentExperience";
 
 const theme = createMnTheme("light");
 
@@ -68,9 +68,12 @@ describe("DevelopmentExperience", () => {
   test("has proper heading structure", () => {
     renderWithTheme(<DevelopmentExperience />);
 
-    // Main heading
-    const mainHeading = screen.getByRole("heading", { level: 1 });
-    expect(mainHeading).toHaveTextContent("Development Experience");
+    // Main heading - use getAllByRole to handle multiple h1s
+    const mainHeadings = screen.getAllByRole("heading", { level: 1 });
+    const developmentExperienceHeading = mainHeadings.find(
+      (heading) => heading.textContent === "Development Experience",
+    );
+    expect(developmentExperienceHeading).toBeInTheDocument();
 
     // Section headings: check each is present and is an h2
     const sectionTitles = [

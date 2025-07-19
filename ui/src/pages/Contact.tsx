@@ -1,6 +1,6 @@
 import React from "react";
-import FormspreeContactForm from "../ui/FormspreeContactForm";
-import ContactInformation from "../ui/ContactInformation";
+import FormspreeContactForm from "../components/common/FormspreeContactForm";
+import ContactInformation from "../components/common/ContactInformation";
 import {
   Card,
   CardContent,
@@ -9,6 +9,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
+import GradientDivider from "../components/common/GradientDivider";
 
 const Contact: React.FC = () => {
   const theme = useTheme();
@@ -41,19 +42,17 @@ const Contact: React.FC = () => {
           hello!
         </Typography>
         {/* Decorative line */}
-        <Box
-          sx={{
-            mt: 3,
-            width: { xs: "100px", md: "150px" },
-            height: "4px",
-            background:
+        <Box sx={{ mt: 3 }}>
+          <GradientDivider
+            width={{ xs: "100px", md: "150px" }}
+            height="4px"
+            gradient={
               theme.palette.mode === "dark"
-                ? "linear-gradient(90deg, #7C4DFF, #448AFF)"
-                : "linear-gradient(90deg, #412A91, #002B5C)",
-            borderRadius: theme.shape.borderRadius,
-            mx: "auto",
-          }}
-        />
+                ? theme.custom.gradients.primaryDark
+                : theme.custom.gradients.primary
+            }
+          />
+        </Box>
       </Box>
       {/* Contact Card */}
       <Box>
