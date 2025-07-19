@@ -1,18 +1,18 @@
-import "./App.css";
+import "./styles/App.css";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect, useState } from "react";
-import Blog from "./components/blog/Blog";
-import BlogPostDetail from "./components/blog/BlogPostDetail";
-import Contact from "./components/pages/Contact";
-import About from "./components/pages/About";
-import DevelopmentExperience from "./components/pages/DevelopmentExperience";
+import Blog from "./components/features/Blog";
+import BlogPostDetail from "./components/features/BlogPostDetail";
+import Contact from "./pages/Contact";
+import About from "./pages/About";
+import DevelopmentExperience from "./pages/DevelopmentExperience";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./components/pages/Home";
-import { createMnTheme } from "./theme";
+import Home from "./pages/Home";
+import { createMnTheme } from "./styles/theme";
 function App() {
   const getSystemTheme = () =>
     window.matchMedia("(prefers-color-scheme: dark)").matches

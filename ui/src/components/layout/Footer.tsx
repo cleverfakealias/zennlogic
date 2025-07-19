@@ -3,7 +3,6 @@ import {
   Avatar,
   Box,
   Typography,
-  useTheme,
   Menu,
   MenuItem,
   IconButton,
@@ -80,7 +79,6 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ themeMode, setThemeMode }) => {
-  const theme = useTheme();
   const isDark = themeMode === "dark";
   return (
     <footer

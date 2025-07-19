@@ -1,5 +1,5 @@
 import "@testing-library/jest-dom";
-import { createMnTheme } from "../../theme";
+import { createMnTheme } from "../../styles/theme";
 
 describe("Theme", () => {
   test("creates light theme correctly", () => {

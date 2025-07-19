@@ -1,8 +1,8 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material/styles";
-import { createMnTheme } from "../../theme";
-import DevelopmentExperience from "../pages/DevelopmentExperience";
+import { createMnTheme } from "../../styles/theme";
+import DevelopmentExperience from "../../pages/DevelopmentExperience";
 
 const theme = createMnTheme("light");
 

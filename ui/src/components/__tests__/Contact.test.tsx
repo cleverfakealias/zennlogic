@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import "@testing-library/jest-dom";
 
 // Mock the FormspreeContactForm to avoid ReCAPTCHA and env issues in tests
-jest.mock("../ui/FormspreeContactForm", () => {
+jest.mock("../common/FormspreeContactForm", () => {
   return function MockFormspreeContactForm() {
     return (
       <div data-testid="formspree-contact-form">
@@ -23,7 +23,7 @@ jest.mock("../ui/FormspreeContactForm", () => {
 });
 
 // Mock the ContactInformation component
-jest.mock("../ui/ContactInformation", () => {
+jest.mock("../common/ContactInformation", () => {
   return function MockContactInformation() {
     return (
       <div data-testid="contact-information">
@@ -38,8 +38,8 @@ jest.mock("../ui/ContactInformation", () => {
 
 import { render, screen } from "@testing-library/react";
 import { ThemeProvider } from "@mui/material/styles";
-import { createMnTheme } from "../../theme";
-import Contact from "../pages/Contact";
+import { createMnTheme } from "../../styles/theme";
+import Contact from "../../pages/Contact";
 
 const theme = createMnTheme("light");
 
