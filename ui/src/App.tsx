@@ -4,7 +4,7 @@ import Footer from "./components/layout/Footer";
 import { Container } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { useEffect, useState } from "react";
+import { useTheme } from "./hooks/useTheme";
 import Blog from "./components/features/Blog";
 import BlogPostDetail from "./components/features/BlogPostDetail";
 import Contact from "./pages/Contact";
@@ -14,24 +14,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import { createMnTheme } from "./styles/theme";
 function App() {
-  const getSystemTheme = () =>
-    window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  const [themeMode, setThemeMode] = useState(getSystemTheme());
-
-  useEffect(() => {
-    const listener = (e: MediaQueryListEvent) => {
-      setThemeMode(e.matches ? "dark" : "light");
-    };
-    const mq = window.matchMedia("(prefers-color-scheme: dark)");
-    mq.addEventListener("change", listener);
-    return () => mq.removeEventListener("change", listener);
-  }, []);
-
-  useEffect(() => {
-    document.body.setAttribute("data-theme", themeMode);
-  }, [themeMode]);
+  const { themeMode, setThemeMode } = useTheme();
 
   const theme = createMnTheme(themeMode as "light" | "dark");
 
