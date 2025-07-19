@@ -1,14 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography, IconButton, useTheme } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 import { useLocation } from "react-router-dom";
-import { FaSun, FaMoon } from "react-icons/fa";
 import "./Header.css";
 import Socials from "./Socials";
 
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Experience", href: "/experience" },
-  { name: "Career", href: "/career" },
   { name: "About", href: "/about" },
   { name: "Contact", href: "/contact" },
   { name: "Blog", href: "/blog" },
@@ -29,7 +29,8 @@ const useSafeLocation = () => {
   }
 };
 
-const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
+const Header: React.FC<HeaderProps> = () => {
+  const theme = useTheme();
   const location = useSafeLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -89,13 +90,13 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
             src="/images/ZL monogram.png"
             alt="ZennLogic monogram logo"
             sx={{
-              width: 48,
-              height: 48,
-              border: "2px solid",
-              borderColor: (theme) => theme.palette.primary.main,
-              boxShadow: (theme) => theme.shadows[4],
-              bgcolor: "background.paper",
-              marginRight: "0.25rem",
+              width: 64,
+              height: 64,
+              border: "3px solid #8CD2EF",
+              boxShadow: "0 4px 24px 0 rgba(140,210,239,0.15)",
+              bgcolor: "#fff",
+              marginRight: "0.5rem",
+              transition: theme.custom.transitions.standard,
             }}
           />
           <Box
@@ -107,16 +108,18 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
             }}
           >
             <Typography
-              variant="h3"
+              variant="h2"
               component="span"
               sx={{
-                fontWeight: 500,
+                fontWeight: 900,
                 letterSpacing: "0.04em",
-                color: "primary.dark",
-                fontFamily: "Inter, Montserrat, Roboto, Arial, sans-serif",
-                lineHeight: 1.1,
-                fontSize: { xs: "1.3rem", md: "2rem" },
-                textShadow: "0 2px 12px rgba(65,42,145,0.08)",
+                color: "#fff",
+                fontFamily: theme.typography.fontFamily,
+                lineHeight: 1.05,
+                fontSize: { xs: "1.4rem", md: "2rem" },
+                textShadow: "0 2px 8px rgba(255,255,255,0.18)",
+                mb: 0.2,
+                transition: theme.custom.transitions.standard,
               }}
             >
               ZennLogic
@@ -125,12 +128,14 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
               variant="subtitle1"
               component="span"
               sx={{
-                color: "secondary.dark",
-                fontWeight: 500,
-                fontFamily: "Inter, Montserrat, Roboto, Arial, sans-serif",
+                color: "#4DD0E1",
+                fontWeight: 700,
+                fontFamily: theme.typography.fontFamily,
                 letterSpacing: "0.08em",
-                mt: 0.2,
-                fontSize: { xs: "0.85rem", md: "1rem" },
+                mt: 0.5,
+                fontSize: { xs: "0.9rem", md: "1rem" },
+                textShadow: "0 2px 8px rgba(77,208,225,0.18)",
+                transition: theme.custom.transitions.standard,
               }}
             >
               Software Development
@@ -197,39 +202,10 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
             gap: "1rem",
           }}
         >
-          <button
-            className="theme-toggle-btn"
-            aria-label={
-              themeMode === "dark"
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-            }
-            style={{
-              background: "none",
-              border: "none",
-              cursor: "pointer",
-              marginRight: "0.5rem",
-              display: "flex",
-              alignItems: "center",
-            }}
-            onClick={() =>
-              setThemeMode(themeMode === "dark" ? "light" : "dark")
-            }
-          >
-            {themeMode === "dark" ? (
-              <span style={{ filter: "drop-shadow(0 0 4px #FFC62F)" }}>
-                <FaSun size={22} title="Switch to light mode" color="#FFC62F" />
-              </span>
-            ) : (
-              <span style={{ filter: "drop-shadow(0 0 4px #8CD2EF)" }}>
-                <FaMoon size={22} title="Switch to dark mode" color="#412A91" />
-              </span>
-            )}
-          </button>
           {!isMobile && <Socials />}
           {isMobile && (
             <>
-              <button
+              <IconButton
                 className="menu-btn"
                 aria-label={
                   drawerOpen ? "Close navigation menu" : "Open navigation menu"
@@ -237,9 +213,11 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
                 aria-controls="mobile-nav"
                 aria-expanded={drawerOpen}
                 onClick={handleDrawerToggle}
+                size="large"
+                sx={{ color: "#8CD2EF" }}
               >
-                <span aria-hidden="true">&#9776;</span>
-              </button>
+                <MenuIcon fontSize="inherit" />
+              </IconButton>
               <div
                 id="mobile-nav"
                 className={`mobile-drawer${drawerOpen ? " open" : ""}`}
@@ -248,21 +226,57 @@ const Header: React.FC<HeaderProps> = ({ themeMode, setThemeMode }) => {
                 aria-label="Mobile navigation menu"
                 ref={drawerRef}
               >
+                {/* Close button */}
+                <IconButton
+                  onClick={() => setDrawerOpen(false)}
+                  aria-label="Close navigation menu"
+                  sx={{
+                    position: "absolute",
+                    top: "1rem",
+                    right: "1rem",
+                    color: "#8CD2EF",
+                    zIndex: 1,
+                    background: "rgba(255,255,255,0.1)",
+                    "&:hover": {
+                      background: "rgba(255,255,255,0.2)",
+                    },
+                  }}
+                >
+                  <CloseIcon />
+                </IconButton>
+
                 <div
                   style={{
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
-                    marginBottom: "2rem",
+                    marginBottom: "1.5rem",
+                    marginTop: "1rem",
                   }}
                 >
-                  <img
+                  <Avatar
                     src="/images/ZL monogram.png"
                     alt="ZennLogic monogram logo"
-                    style={{ height: "2.75rem", width: "2.75rem" }}
+                    sx={{
+                      width: 44,
+                      height: 44,
+                      border: "3px solid #8CD2EF",
+                      boxShadow: "0 4px 24px 0 rgba(140,210,239,0.15)",
+                      bgcolor: "#fff",
+                    }}
                   />
-                  <span className="site-title">ZennLogic Development</span>
+                  <span className="site-title">ZennLogic</span>
                 </div>
+
+                {/* Divider */}
+                <div
+                  style={{
+                    height: "1px",
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(140,210,239,0.3), transparent)",
+                    marginBottom: "1.5rem",
+                  }}
+                />
                 <ul>
                   {navLinks.map((link) => (
                     <li key={link.name}>

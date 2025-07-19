@@ -10,9 +10,8 @@ import {
   Chip,
   styled,
 } from "@mui/material";
-import { Business, Support, Code } from "@mui/icons-material";
 
-interface TimelineItemData {
+export interface TimelineItemData {
   title: string;
   subtitle: string;
   description: string;
@@ -22,45 +21,16 @@ interface TimelineItemData {
   startDate: string; // For sorting
 }
 
-const timelineData: TimelineItemData[] = [
-  {
-    title: "Software Engineer",
-    subtitle: "SPS Commerce",
-    description:
-      "Seasoned Software Developer working on enterprise SaaS applications, focusing on scalable cloud solutions and modern web technologies.",
-    timestamp: "2017 - Present",
-    startDate: "2017",
-    color: "primary",
-    icon: <Code />,
-  },
-  {
-    title: "Support Supervisor",
-    subtitle: "WhereToLive.com",
-    description:
-      "Managed technical support team for web development and email hosting services in the Real Estate industry, leading a team of 8+ support representatives.",
-    timestamp: "2012 - 2017",
-    startDate: "2012",
-    color: "secondary",
-    icon: <Business />,
-  },
-  {
-    title: "Technical Support Representative",
-    subtitle: "Microboards Technology",
-    description:
-      "Provided comprehensive technical support for CD and DVD replication and printing devices, troubleshooting hardware and software issues.",
-    timestamp: "2007 - 2012",
-    startDate: "2007",
-    color: "success",
-    icon: <Support />,
-  },
-];
+interface CareerTimelineProps {
+  timelineData: TimelineItemData[];
+  title?: string;
+  description?: string;
+  header?: React.ReactNode;
+}
 
-// Styled components for the timeline
 const TimelineContainer = styled(Box)(({ theme }) => ({
   position: "relative",
   padding: theme.spacing(2, 0),
-
-  // Timeline line
   "&::before": {
     content: '""',
     position: "absolute",
@@ -80,10 +50,7 @@ const TimelineItem = styled(Box)<{ index: number }>(({ theme, index }) => ({
   display: "flex",
   alignItems: "center",
   marginBottom: theme.spacing(4),
-
-  // Alternate sides on desktop
   flexDirection: index % 2 === 0 ? "row" : "row-reverse",
-
   [theme.breakpoints.down("md")]: {
     flexDirection: "row",
     paddingLeft: theme.spacing(8),
@@ -92,13 +59,10 @@ const TimelineItem = styled(Box)<{ index: number }>(({ theme, index }) => ({
 
 const TimelineContent = styled(Box)<{ index: number }>(({ theme, index }) => ({
   width: "45%",
-
   [theme.breakpoints.down("md")]: {
     width: "100%",
     marginLeft: theme.spacing(2),
   },
-
-  // Add some spacing between content and center line
   ...(index % 2 === 0
     ? {
         paddingRight: theme.spacing(4),
@@ -123,12 +87,9 @@ const TimelineDot = styled(Avatar)<{ color: string }>(({ theme, color }) => ({
   height: 56,
   zIndex: 2,
   boxShadow: theme.shadows[4],
-
   [theme.breakpoints.down("md")]: {
     left: "32px",
   },
-
-  // Color variants
   ...(color === "primary" && {
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
@@ -151,59 +112,50 @@ const TimelineDot = styled(Avatar)<{ color: string }>(({ theme, color }) => ({
   }),
 }));
 
-const CareerTimeline: React.FC = () => {
+const CareerTimeline: React.FC<CareerTimelineProps> = ({
+  timelineData,
+  title,
+  description,
+  header,
+}) => {
   const theme = useTheme();
-
-  // Sort timeline items by start date (most recent first)
   const sortedTimelineData = [...timelineData].sort(
     (a, b) => parseInt(b.startDate) - parseInt(a.startDate),
   );
-
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
-      {/* Header Section */}
-      <Box sx={{ textAlign: "center", mb: 6 }}>
-        <Typography
-          variant="h2"
-          component="h1"
-          gutterBottom
-          sx={{
-            fontWeight: "bold",
-            color: theme.palette.primary.main,
-            mb: 2,
-          }}
-        >
-          Career Timeline
-        </Typography>
-        <Typography
-          variant="h5"
-          color="text.secondary"
-          sx={{ maxWidth: "600px", mx: "auto" }}
-        >
-          My professional journey in technology and software development
-        </Typography>
-
-        {/* Decorative line */}
-        <Box
-          sx={{
-            mt: 3,
-            width: { xs: "100px", md: "150px" },
-            height: "4px",
-            background: "linear-gradient(90deg, #412A91, #002B5C)",
-            borderRadius: "2px",
-            mx: "auto",
-          }}
-        />
-      </Box>
-
-      {/* Timeline */}
+      {(title || description || header) && (
+        <Box sx={{ textAlign: "center", mb: 6 }}>
+          {title && (
+            <Typography
+              variant="h2"
+              component="h1"
+              gutterBottom
+              sx={{
+                fontWeight: "bold",
+                color: theme.palette.primary.main,
+                mb: 2,
+              }}
+            >
+              {title}
+            </Typography>
+          )}
+          {description && (
+            <Typography
+              variant="h5"
+              color="text.secondary"
+              sx={{ maxWidth: "600px", mx: "auto" }}
+            >
+              {description}
+            </Typography>
+          )}
+          {header}
+        </Box>
+      )}
       <TimelineContainer>
         {sortedTimelineData.map((item, index) => (
           <TimelineItem key={index} index={index}>
-            {/* Timeline Dot */}
             <TimelineDot color={item.color}>{item.icon}</TimelineDot>
-
-            {/* Timeline Content */}
             <TimelineContent index={index}>
               <Card
                 elevation={3}
@@ -218,7 +170,6 @@ const CareerTimeline: React.FC = () => {
                 }}
               >
                 <CardContent sx={{ p: 3 }}>
-                  {/* Timestamp Chip */}
                   <Chip
                     label={item.timestamp}
                     color={item.color}
@@ -226,8 +177,6 @@ const CareerTimeline: React.FC = () => {
                     size="small"
                     sx={{ mb: 2 }}
                   />
-
-                  {/* Job title */}
                   <Typography
                     variant="h5"
                     component="h3"
@@ -239,8 +188,6 @@ const CareerTimeline: React.FC = () => {
                   >
                     {item.title}
                   </Typography>
-
-                  {/* Company */}
                   <Typography
                     variant="h6"
                     color="primary"
@@ -251,8 +198,6 @@ const CareerTimeline: React.FC = () => {
                   >
                     {item.subtitle}
                   </Typography>
-
-                  {/* Description */}
                   <Typography
                     variant="body1"
                     color="text.secondary"

@@ -1,6 +1,7 @@
 import React from "react";
 import { Typography, Box, useTheme, Paper, Button } from "@mui/material";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import AccentBar from "./AccentBar";
 
 const HeroBanner: React.FC = () => {
   const theme = useTheme();
@@ -10,14 +11,8 @@ const HeroBanner: React.FC = () => {
       elevation={3}
       sx={{
         p: { xs: 2, md: 4 },
-        background:
-          theme.palette.mode === "dark"
-            ? "linear-gradient(135deg, #23243a 0%, #2c2e4d 100%)"
-            : "linear-gradient(135deg, #f5f7fa 0%, #e8eaf6 100%)",
-        boxShadow:
-          theme.palette.mode === "dark"
-            ? "0 4px 32px 0 rgba(124,77,255,0.10)"
-            : "0 4px 32px 0 rgba(65,42,145,0.08)",
+        background: theme.custom.gradients.hero[theme.palette.mode],
+        boxShadow: theme.custom.shadows.card[theme.palette.mode],
         display: "flex",
         flexDirection: { xs: "column", md: "row" },
         alignItems: "center",
@@ -25,25 +20,14 @@ const HeroBanner: React.FC = () => {
         gap: 4,
         position: "relative",
         overflow: "hidden",
+        transition: theme.custom.transitions.smooth,
+        "&:hover": {
+          boxShadow: theme.custom.shadows.card.hover[theme.palette.mode],
+        },
       }}
     >
-      {/* Animated/gradient accent bar (top left) */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: 8,
-          background:
-            theme.palette.mode === "dark"
-              ? "linear-gradient(90deg, #7C4DFF, #448AFF)"
-              : "linear-gradient(90deg, #412A91, #002B5C)",
-          opacity: 0.9,
-          borderTopLeftRadius: 4,
-          borderTopRightRadius: 4,
-        }}
-      />
+      {/* Top accent bar */}
+      <AccentBar />
 
       {/* Logo Section */}
       <Box
@@ -66,11 +50,8 @@ const HeroBanner: React.FC = () => {
               theme.palette.mode === "dark"
                 ? "brightness(1.1)"
                 : "brightness(0.9)",
-            transition: "filter 0.3s ease",
-            boxShadow:
-              theme.palette.mode === "dark"
-                ? "0 4px 24px 0 rgba(124,77,255,0.15)"
-                : "0 4px 24px 0 rgba(65,42,145,0.10)",
+            transition: theme.custom.transitions.standard,
+            boxShadow: theme.custom.shadows.social[theme.palette.mode],
             borderRadius: 4,
           }}
         />
@@ -122,23 +103,9 @@ const HeroBanner: React.FC = () => {
           endIcon={<ArrowForwardIcon />}
           sx={{
             mt: 4,
-            borderRadius: 4,
-            fontWeight: 600,
             px: 4,
-            boxShadow:
-              theme.palette.mode === "dark"
-                ? "0 2px 8px 0 rgba(124,77,255,0.18)"
-                : "0 2px 8px 0 rgba(65,42,145,0.12)",
-            textTransform: "none",
             fontSize: { xs: "1rem", md: "1.1rem" },
-            letterSpacing: 0,
-            transition: "box-shadow 0.2s",
-            "&:hover": {
-              boxShadow:
-                theme.palette.mode === "dark"
-                  ? "0 4px 16px 0 rgba(124,77,255,0.25)"
-                  : "0 4px 16px 0 rgba(65,42,145,0.18)",
-            },
+            transition: theme.custom.transitions.standard,
           }}
           href="/contact"
         >

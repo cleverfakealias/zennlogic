@@ -8,7 +8,16 @@ import {
   CardContent,
   useTheme,
 } from "@mui/material";
-import { Code, Web, Storage, Build, CloudQueue } from "@mui/icons-material";
+import {
+  Code,
+  Web,
+  Storage,
+  Build,
+  CloudQueue,
+  Support,
+  Business,
+} from "@mui/icons-material";
+import CareerTimeline, { TimelineItemData } from "../shared/CareerTimeline";
 
 const DevelopmentExperience: React.FC = () => {
   const theme = useTheme();
@@ -55,6 +64,39 @@ const DevelopmentExperience: React.FC = () => {
         "I work confidently with Docker and Kubernetes for containerization and orchestration. I'm well-versed in microservices and event-driven architectures, and I follow Agile/Scrum practices to drive iterative development and collaboration across teams.",
       icon: <CloudQueue />,
       color: "info",
+    },
+  ];
+
+  const timelineData: TimelineItemData[] = [
+    {
+      title: "Software Engineer",
+      subtitle: "SPS Commerce",
+      description:
+        "Seasoned Software Developer working on enterprise SaaS applications, focusing on scalable cloud solutions and modern web technologies.",
+      timestamp: "2017 - Present",
+      startDate: "2017",
+      color: "primary",
+      icon: <Code />,
+    },
+    {
+      title: "Support Supervisor",
+      subtitle: "WhereToLive.com",
+      description:
+        "Managed technical support team for web development and email hosting services in the Real Estate industry, leading a team of 8+ support representatives.",
+      timestamp: "2012 - 2017",
+      startDate: "2012",
+      color: "secondary",
+      icon: <Business />,
+    },
+    {
+      title: "Technical Support Representative",
+      subtitle: "Microboards Technology",
+      description:
+        "Provided comprehensive technical support for CD and DVD replication and printing devices, troubleshooting hardware and software issues.",
+      timestamp: "2007 - 2012",
+      startDate: "2007",
+      color: "success",
+      icon: <Support />,
     },
   ];
 
@@ -231,6 +273,11 @@ const DevelopmentExperience: React.FC = () => {
           </Grid>
         ))}
       </Grid>
+      <CareerTimeline
+        timelineData={timelineData}
+        title="Career Timeline"
+        description="My professional journey in technology and software development"
+      />
     </Container>
   );
 };

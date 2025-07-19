@@ -383,13 +383,13 @@ const FormspreeContactForm: React.FC<FormspreeContactFormProps> = ({
                   borderRadius: theme.shape.borderRadius,
                   fontWeight: theme.typography.fontWeightBold,
                   fontSize: theme.typography.body1?.fontSize,
-                  background: `linear-gradient(90deg, ${theme.palette.primary.main} 0%, ${theme.palette.secondary.main} 100%)`,
+                  background: `linear-gradient(90deg, ${theme.palette.primary.main} 0%, ${theme.palette.accent?.main || theme.palette.primary.light} 100%)`,
                   color: theme.palette.getContrastText(
                     theme.palette.primary.main,
                   ),
                   boxShadow: "0 2px 8px 0 rgba(31, 38, 135, 0.18)",
                   "&:hover": {
-                    background: `linear-gradient(90deg, ${theme.palette.primary.dark} 0%, ${theme.palette.secondary.dark || theme.palette.secondary.main} 100%)`,
+                    background: `linear-gradient(90deg, ${theme.palette.primary.dark} 0%, ${theme.palette.accent?.dark || theme.palette.primary.main} 100%)`,
                   },
                   "&:disabled": {
                     background: theme.palette.grey[400],
